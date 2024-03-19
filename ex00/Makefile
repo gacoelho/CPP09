@@ -4,7 +4,7 @@ SRC		=	main.cpp BitcoinExchange.cpp
 
 CC 		= c++
 
-FLAGS	= -Wall -Wextra -Werror 
+FLAGS	= -Wall -Wextra -Werror -std=c++98
 
 OBJS 	= $(SRC:.c=.o)
 

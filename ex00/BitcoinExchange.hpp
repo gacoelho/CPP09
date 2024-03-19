@@ -14,18 +14,17 @@ class Btc
 {
 private:
     std::map <std::string, float> data;
-    int flag;
 public:
     Btc();
     Btc(const Btc &copy);
     Btc& operator=(const Btc & copy);
     ~Btc();
-    float findExchance(const std::string& filename);
+    float findExchange(const std::string& filename);
+    int isDate(const std::string & date);
+    int isValue(const std::string & value);
     void setData(std::string date, float value);
     void readIn(std::string path);
-    
     std::map<std::string, float> getData();
-    std::vector<std::string> split(std::string str, char c);
 };
 
 
