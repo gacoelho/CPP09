@@ -1,5 +1,5 @@
 #include "PmergeMe.hpp"
-
+#include <cstdio>
 int main(int argc, char **argv)
 {
 	if(argc == 1)
@@ -8,11 +8,13 @@ int main(int argc, char **argv)
 	try
 	{
 		for (int i = 1; i < argc; i += 1)
+		{
 			if (std::string(argv[i]).find_first_not_of("0123456789 ") != std::string::npos)
 				throw PmergeMe::IE_Exception();
+		}
 		std::vector<unsigned int> tmp;
 		for (int i = 1; i < argc; i+= 1)
-			tmp.push_back(f_stou(argv[1]));
+			tmp.push_back(f_stou(argv[i]));
 		std::vector<unsigned int>::iterator itr;
 		std::vector<unsigned int>::iterator itr2;
 		for (itr = tmp.begin(); itr != tmp.end(); itr++)

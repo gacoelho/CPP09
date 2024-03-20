@@ -6,6 +6,8 @@
 #include <sstream>
 #include "PmergeMe.hpp"
 
+#define MICROSECOND 100000
+
 unsigned int f_stou(const std::string &str)
 {
 	unsigned int num;
@@ -30,7 +32,7 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& copy)
 PmergeMe::~PmergeMe(void) {};
 
 static void printVec(std::vector<unsigned int>& vec)
-{
+{ 
 	std::vector<unsigned int>::const_iterator itr;
 	for (itr = vec.begin(); itr != vec.end(); itr++)
 		std::cout << *itr << " ";
@@ -63,7 +65,7 @@ static std::vector<unsigned int> mergeVecs(std::vector<unsigned int> & n1, std::
 	while (!n2.empty())
 	{
 		r.push_back(n2.front());
-		n1.erase(n2.begin());
+		n2.erase(n2.begin());
 	}
 
 	return r;
@@ -92,13 +94,13 @@ void PmergeMe::sortVec(int argc, char **argv)
 	std::vector<unsigned int> stor;
 	for (int i = 1; i < argc; i += 1)
 	{
-		stor.push_back(f_stou(argv[1]));
+		stor.push_back(f_stou(argv[i]));
 	}
 	std::cout << "<vec>Before: ";
 	printVec(stor);
 	std::clock_t start = std::clock();
 	stor = mergeInsertVec(stor);
-	double time_taken = static_cast<double>(std::clock() - start) / static_cast<double>(CLOCKS_PER_SEC) * 100000;
+	double time_taken = static_cast<double>(std::clock() - start) / static_cast<double>(CLOCKS_PER_SEC) * MICROSECOND;
 	std::cout << "<vec>After: ";
 	printVec(stor);
 	std::cout << "Time to process a range of " << argc - 1
@@ -139,7 +141,7 @@ static std::list<unsigned int> mergeLists(std::list<unsigned int> & n1, std::lis
 	while (!n2.empty())
 	{
 		r.push_back(n2.front());
-		n1.erase(n2.begin());
+		n2.erase(n2.begin());
 	}
 
 	return r;
@@ -174,13 +176,13 @@ void PmergeMe::sortList(int argc, char **argv)
 	std::list<unsigned int> stor;
 	for (int i = 1; i < argc; i += 1)
 	{
-		stor.push_back(f_stou(argv[1]));
+		stor.push_back(f_stou(argv[i]));
 	}
 	std::cout << "<list>Before: ";
 	printList(stor);
 	std::clock_t start = std::clock();
 	stor = mergeInsertList(stor);
-	double time_taken = static_cast<double>(std::clock() - start) / static_cast<double>(CLOCKS_PER_SEC) * 100000;
+	double time_taken = static_cast<double>(std::clock() - start) / static_cast<double>(CLOCKS_PER_SEC) * MICROSECOND;
 	std::cout << "<list>After: ";
 	printList(stor);
 	std::cout << "Time to process a range of " << argc - 1
